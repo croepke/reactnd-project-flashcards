@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, List, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  List,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native';
 
 class DeckListView extends Component {
 
@@ -31,23 +38,46 @@ class DeckListView extends Component {
     }
   }
 
+  _keyExtractor = (item) => item.title;
+
   renderItem = ({ item }) => {
     return (
-      <Text>{item.title}</Text>
+      <View style={styles.listItem}>
+        <TouchableOpacity>
+          <Text>{item.title}</Text>
+          <Text>{item.questions.length}</Text>
+        </TouchableOpacity>
+      </View>
     )
   }
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
+        <Text style={styles.h1}>Your decks</Text>
         <FlatList
           data={this.state.data}
           renderItem={this.renderItem}
+          keyExtractor={this._keyExtractor}
         />
       </View>
     )
   }
-
 }
 
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 50,
+  },
+  h1: {
+    fontSize: 24,
+    textAlign: 'center'
+  },
+  listItem: {
+    justifyContent:'center',
+    backgroundColor: 'grey',
+    borderWidth: 1,
+    height: 100
+  }
+});
 export default DeckListView;

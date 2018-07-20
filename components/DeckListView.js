@@ -41,9 +41,10 @@ class DeckListView extends Component {
   _keyExtractor = (item) => item.title;
 
   renderItem = ({ item }) => {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.listItem}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigate('Details')}>
           <Text>{item.title}</Text>
           <Text>{item.questions.length}</Text>
         </TouchableOpacity>
@@ -52,6 +53,7 @@ class DeckListView extends Component {
   }
 
   render() {
+
     return (
       <View style={styles.container}>
         <Text style={styles.h1}>Your decks</Text>

@@ -1,16 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DeckListView from './components/DeckListView';
+import DeckView from './components/DeckView';
+import { createStackNavigator } from 'react-navigation';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View>
-        <DeckListView />
-      </View>
+      <RootStack />
     );
   }
 }
+
+const RootStack = createStackNavigator(
+  {
+    Home: DeckListView,
+    Details: DeckView
+  },
+  {
+    initialRouteName: 'Home'
+  }
+);
 
 const styles = StyleSheet.create({
   container: {

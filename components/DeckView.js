@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
 
-class DeckView extends Component { 
+class DeckView extends Component {
+
+  addCard = () => {
+    this.props.navigation.navigate('NewQuestion');
+  }
+
+  startQuiz = () => {
+
+  }
+
   render() {
     return (
       <View>
-        <Text>"Hallo DeckView"</Text>
+        <Text style={{fontSize: 24}}>{this.props.navigation.getParam('item').title}</Text>
+        <Text>{this.props.navigation.getParam('item').questions.length} cards</Text>
+        <Button title='Add Card' onPress={this.addCard} />
+        <Button title='Start quiz' onPress={this.startQuiz}/>
       </View>
     )
   }

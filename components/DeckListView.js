@@ -44,7 +44,9 @@ class DeckListView extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.listItem}>
-        <TouchableOpacity onPress={() => navigate('Details')}>
+        <TouchableOpacity onPress={() => navigate('Details', {
+          item
+        })}>
           <Text>{item.title}</Text>
           <Text>{item.questions.length}</Text>
         </TouchableOpacity>

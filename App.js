@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DeckListView from './components/DeckListView';
 import DeckView from './components/DeckView';
+import NewQuestion from './components/NewQuestion';
 import { createStackNavigator } from 'react-navigation';
 
 export default class App extends React.Component {
@@ -15,7 +16,9 @@ export default class App extends React.Component {
 const RootStack = createStackNavigator(
   {
     Home: DeckListView,
-    Details: DeckView
+    Details: DeckView,
+    NewQuestion: NewQuestion,
+    
   },
   {
     initialRouteName: 'Home'

@@ -1,41 +1,23 @@
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   View,
   Text,
+  Button,
   List,
   FlatList,
   StyleSheet,
   TouchableOpacity
 } from 'react-native';
 
+import { connect } from 'react-redux';
+import { saveDeckTitle, getDecks } from '../utils/api';
+import { handleReceiveDecks } from '../actions/index';
+
 class DeckListView extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [
-        { title: 'React',
-          questions: [
-            {
-              question: 'What is React?',
-              answer: 'A library for managing user interfaces'
-            },
-            {
-              question: 'Where do you make Ajax requests in React?',
-              answer: 'The componentDidMount lifecycle event'
-            }
-          ]
-        },
-        { title: 'JavaScript',
-          questions: [
-            {
-              question: 'What is a closure?',
-              answer: 'The combination of a function and the lexical environment within which that function was declared.'
-            }
-          ]
-        }
-      ]
-    }
+  componentDidMount() {
+    this.props.dispatch(handleReceiveDecks());
   }
 
   _keyExtractor = (item) => item.title;
@@ -55,15 +37,16 @@ class DeckListView extends Component {
   }
 
   render() {
-
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.h1}>Your decks</Text>
         <FlatList
-          data={this.state.data}
+          data={this.props.decks}
           renderItem={this.renderItem}
           keyExtractor={this._keyExtractor}
         />
+        <Button title='Add Deck' onPress={() => navigate('NewDeck')} />
       </View>
     )
   }
@@ -84,4 +67,11 @@ const styles = StyleSheet.create({
     height: 100
   }
 });
-export default DeckListView;
+
+function mapStateToProps(state) {
+  return {
+    decks: Object.values(state.decks)
+  }
+}
+
+export default connect(mapStateToProps)(DeckListView);

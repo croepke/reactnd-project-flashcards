@@ -3,12 +3,22 @@ import { StyleSheet, Text, View } from 'react-native';
 import DeckListView from './components/DeckListView';
 import DeckView from './components/DeckView';
 import NewQuestion from './components/NewQuestion';
+import NewDeck from './components/NewDeck';
 import { createStackNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
+import { createStore } from 'redux';
+import middleware from './middleware'
+
+const store=createStore(reducer, middleware);
 
 export default class App extends React.Component {
+
   render() {
     return (
-      <RootStack />
+      <Provider store={store}>
+        <RootStack />
+      </Provider>
     );
   }
 }
@@ -18,7 +28,7 @@ const RootStack = createStackNavigator(
     Home: DeckListView,
     Details: DeckView,
     NewQuestion: NewQuestion,
-    
+    NewDeck: NewDeck
   },
   {
     initialRouteName: 'Home'

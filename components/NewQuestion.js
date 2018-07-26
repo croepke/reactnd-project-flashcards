@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, Button } from 'react-native';
 
 class NewQuestion extends Component {
 
@@ -14,7 +14,7 @@ class NewQuestion extends Component {
   createCard = () => {
 
   }
-  
+
   render() {
     return (
       <View>

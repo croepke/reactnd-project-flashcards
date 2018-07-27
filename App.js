@@ -4,6 +4,7 @@ import DeckListView from './components/DeckListView';
 import DeckView from './components/DeckView';
 import NewQuestion from './components/NewQuestion';
 import NewDeck from './components/NewDeck';
+import Quiz from './components/Quiz';
 import { createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
@@ -28,7 +29,8 @@ const RootStack = createStackNavigator(
     Home: DeckListView,
     Details: DeckView,
     NewQuestion: NewQuestion,
-    NewDeck: NewDeck
+    NewDeck: NewDeck,
+    Quiz: Quiz
   },
   {
     initialRouteName: 'Home'

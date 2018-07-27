@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS } from '../actions';
+import { RECEIVE_DECKS, ADD_CARD, SAVE_DECK } from '../actions';
 
 export function decks(state={}, action) {
   switch(action.type) {
@@ -6,6 +6,22 @@ export function decks(state={}, action) {
       return {
         ...state,
         ...action.decks
+      }
+    case ADD_CARD:
+      return {
+        ...state,
+        [action.title]: {
+          ...state[action.title],
+          questions: state[action.title].questions.concat([action.card])
+        }
+      }
+    case SAVE_DECK:
+      return {
+        ...state,
+        [action.title]: {
+          title: action.title,
+          questions: []
+        }
       }
     default:
       return state

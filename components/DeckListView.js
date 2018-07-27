@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { saveDeckTitle, getDecks } from '../utils/api';
+import { saveDeckTitle, getDecks, clear } from '../utils/api';
 import { handleReceiveDecks } from '../actions/index';
 
 class DeckListView extends Component {
@@ -41,12 +41,12 @@ class DeckListView extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.h1}>Your decks</Text>
+        <Button title='Add Deck' onPress={() => navigate('NewDeck')} />
         <FlatList
           data={this.props.decks}
           renderItem={this.renderItem}
           keyExtractor={this._keyExtractor}
         />
-        <Button title='Add Deck' onPress={() => navigate('NewDeck')} />
       </View>
     )
   }

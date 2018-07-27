@@ -18,20 +18,27 @@ export function saveDeckTitle(title) {
     'title': title,
     questions: []
   };
-  AsyncStorage.getItem('decks', (err, result) => {
+  return AsyncStorage.getItem('decks', (err, result) => {
     if(result !== null) {
-      AsyncStorage.mergeItem('decks', JSON.stringify({
+      return AsyncStorage.mergeItem('decks', JSON.stringify({
         [title]: deck
       }));
     }
     else {
-      AsyncStorage.setItem('decks', JSON.stringify({
+      return AsyncStorage.setItem('decks', JSON.stringify({
         [title]: deck
       }))
     }
   });
 }
+
 export function addCardToDeck(title, card) {
   // take in two arguments, title and card, and will add the card to the list
   // of questions for the deck with the associated title.
+  return AsyncStorage.getItem('decks')
+    .then((str) => {
+      let data = JSON.parse(str);
+      data[title].questions = data[title].questions.concat([card]);
+      return AsyncStorage.setItem('decks', JSON.stringify(data))
+    })
 }

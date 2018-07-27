@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
+import { connect } from 'react-redux';
+import { handleAddCard } from '../actions/index';
 
 class NewQuestion extends Component {
 
@@ -12,7 +14,19 @@ class NewQuestion extends Component {
   }
 
   createCard = () => {
+    const { dispatch } = this.props;
+    const { question, answer } = this.state;
+    const { navigation } = this.props;
 
+    const obj = {
+      title: navigation.getParam('title'),
+      card: {
+        question,
+        answer
+      }
+    }
+    dispatch(handleAddCard(obj));
+    navigation.goBack();
   }
 
   render() {
@@ -38,4 +52,4 @@ class NewQuestion extends Component {
   }
 }
 
-export default NewQuestion;
+export default connect()(NewQuestion);

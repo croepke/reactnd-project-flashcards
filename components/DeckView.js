@@ -4,11 +4,15 @@ import { Text, View, Button } from 'react-native';
 class DeckView extends Component {
 
   addCard = () => {
-    this.props.navigation.navigate('NewQuestion');
+    const { navigation }  = this.props;
+    const title = navigation.getParam('item').title;
+    navigation.navigate('NewQuestion', { title });
   }
 
   startQuiz = () => {
-
+    const { navigation }  = this.props;
+    const title = navigation.getParam('item').title;
+    navigation.navigate('Quiz', { title });
   }
 
   render() {

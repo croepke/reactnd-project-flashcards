@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
-import { saveDeckTitle, clear } from '../utils/api';
-import { AsyncStorage } from 'react-native';
-
+import { handleSaveDeck } from '../actions/index';
+import { clear} from '../utils/api';
+import { connect } from 'react-redux';
 
 class NewDeck extends Component {
 
@@ -14,7 +14,7 @@ class NewDeck extends Component {
   }
   createCard = () => {
     const { navigate } = this.props.navigation;
-    saveDeckTitle(this.state.title);
+    this.props.dispatch(handleSaveDeck(this.state.title));
     navigate('Home');
   }
 
@@ -36,4 +36,4 @@ class NewDeck extends Component {
   }
 }
 
-export default NewDeck;
+export default connect()(NewDeck);

@@ -9,7 +9,6 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native';
-
 import { connect } from 'react-redux';
 import { saveDeckTitle, getDecks, clear } from '../utils/api';
 import { handleReceiveDecks } from '../actions/index';
@@ -27,10 +26,10 @@ class DeckListView extends Component {
     return (
       <View style={styles.listItem}>
         <TouchableOpacity onPress={() => navigate('Details', {
-          item
+          title: item.title
         })}>
-          <Text>{item.title}</Text>
-          <Text>{item.questions.length}</Text>
+          <Text style={styles.h2}>{item.title}</Text>
+          <Text>{item.questions.length} card(s)</Text>
         </TouchableOpacity>
       </View>
     )
@@ -54,16 +53,22 @@ class DeckListView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
+    marginTop: 20,
+    paddingBottom: 50
   },
   h1: {
     fontSize: 24,
     textAlign: 'center'
   },
+  h2: {
+    fontSize: 16
+  },
   listItem: {
     justifyContent:'center',
-    backgroundColor: 'grey',
-    borderWidth: 1,
+    backgroundColor: 'white',
+    marginBottom: 5,
+    paddingLeft: 20,
+    borderColor: 'gray',
     height: 100
   }
 });

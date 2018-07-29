@@ -24,9 +24,9 @@ export function handleAddCard({ title, card }) {
 
 export function handleSaveDeck(title) {
   return (dispatch) => {
-    saveDeckTitle(title)
+    return saveDeckTitle(title)
       .then(() => {
-        dispatch(saveDeck(title));
+        return dispatch(saveDeck(title));
       })
   }
 }

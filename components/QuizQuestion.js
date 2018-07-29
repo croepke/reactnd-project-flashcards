@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { View, Text, Button, StyleSheet, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
-import { View, Text, Button } from 'react-native';
 
 class QuizQuestion extends Component {
 
@@ -27,26 +27,33 @@ class QuizQuestion extends Component {
   render() {
     const { showQuestion } = this.state;
     const { question } = this.props;
-    const title = showQuestion ? question.question : question.answer;
+    const title = showQuestion ? 'Q: ' + question.question : 'A: ' + question.answer;
     const show = showQuestion ? 'Show answer' : 'Show question';
 
     return (
-      <View>
-        <Text>{title}</Text>
+      <View style={styles.container}>
+        <Text style={styles.h1}>{title}</Text>
         <Button
           title={show}
           onPress={this.flipCard}
         />
         { !showQuestion ?
-          <View>
-            <Button
-              title='Yes'
-              onPress={() => this.handleAnswer(true)}
-            />
-            <Button
-              title='No'
-              onPress={() => this.handleAnswer(false)}
-            />
+          <View style={styles.buttonContainer}>
+            <Text style={styles.h2}>Was your answer correct?</Text>
+            <TouchableHighlight style={styles.buttonSuccess}>
+              <Button
+                title='Yes'
+                color='white'
+                onPress={() => this.handleAnswer(true)}
+              />
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.buttonFalse}>
+              <Button
+                title='No'
+                color='white'
+                onPress={() => this.handleAnswer(false)}
+              />
+            </TouchableHighlight>
           </View>
         : null
         }
@@ -54,5 +61,33 @@ class QuizQuestion extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20,
+    alignItems: 'center'
+  },
+  h2: {
+    fontSize: 18,
+    marginBottom: 20
+  },
+  buttonContainer: {
+    alignItems: 'center',
+    paddingTop: 20
+  },
+  buttonSuccess: {
+    width: 100,
+    marginBottom: 20,
+    backgroundColor: 'green'
+  },
+  buttonFalse: {
+    width: 100,
+    backgroundColor: 'red'
+  },
+  h1: {
+    fontSize: 24,
+    marginBottom: 5
+  }
+});
 
 export default connect()(QuizQuestion);

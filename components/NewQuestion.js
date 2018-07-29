@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
-import { connect } from 'react-redux';
+import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
 import { handleAddCard } from '../actions/index';
+import { connect } from 'react-redux';
 
 class NewQuestion extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      question: 'Some question',
+      question: '',
       answer: ''
     }
   }
@@ -31,15 +31,17 @@ class NewQuestion extends Component {
 
   render() {
     return (
-      <View>
-        <Text>New Question</Text>
+      <View style={styles.container}>
+        <Text style={styles.h1}>New Question</Text>
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          placeholder='Enter the question'
+          style={styles.input}
           value={this.state.question}
           onChangeText={(question) => this.setState({question})}
         />
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          placeholder='Enter the answer'
+          style={styles.input}
           value={this.state.answer}
           onChangeText={(answer) => this.setState({answer})}
         />
@@ -51,5 +53,22 @@ class NewQuestion extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  h1: {
+    fontSize: 24,
+    marginBottom: 5
+  },
+  input: {
+    width: '99%',
+    height: 60,
+    marginBottom: 5,
+    backgroundColor: 'white'
+  }
+});
 
 export default connect()(NewQuestion);
